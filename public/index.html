@@ -23,6 +23,17 @@
   .hbtn:hover { background: rgba(255,255,255,0.3); }
   .hbtn svg { width: 15px; height: 15px; }
 
+  /* Demo / walkthrough banner */
+  .demo-banner { display: none; max-width: 1280px; margin: 1rem auto 0; padding: 0.85rem 1.1rem; background: linear-gradient(135deg, rgba(214,71,127,0.12), rgba(124,58,237,0.1)); border: 1px solid rgba(124,58,237,0.22); border-radius: 14px; align-items: center; gap: 1rem; }
+  .demo-banner.show { display: flex; }
+  .demo-banner-text { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+  .demo-banner-text strong { color: var(--purple); font-weight: 800; }
+  .demo-banner-text em { color: var(--pink); font-style: normal; font-weight: 600; }
+  .btn-demo-start { margin-left: auto; flex-shrink: 0; background: var(--grad); color: #fff; border: none; border-radius: 10px; padding: 0.6rem 1.05rem; font-size: 0.83rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .btn-demo-start:hover { filter: brightness(1.06); }
+  @media (max-width: 700px) { .demo-banner { flex-direction: column; align-items: flex-start; } .btn-demo-start { margin-left: 0; } }
+  .sample-badge { position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(124,58,237,0.9); color: #fff; font-size: 0.6rem; font-weight: 700; padding: 0.18rem 0.5rem; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+
   /* Tabs */
   .tabs { max-width: 1280px; margin: 0 auto; padding: 1rem 1.1rem 0; display: flex; gap: 0.5rem; }
   .tab { background: transparent; border: none; padding: 0.6rem 1.05rem; font-size: 0.92rem; font-weight: 700; color: var(--muted); cursor: pointer; border-radius: 10px 10px 0 0; transition: all 0.15s; display: inline-flex; align-items: center; gap: 0.4rem; }
@@ -180,6 +191,13 @@
   </div>
 </header>
 
+<div class="demo-banner" id="demoBanner">
+  <div class="demo-banner-text">
+    <strong>Welcome to your Saree Wardrobe! 👋</strong> This is sample data so you can explore. Browse the <em>8 sarees</em> and <em>5 blouses</em> with auto-detected body &amp; border colors, open the <em>Outfits</em> tab to see saree–blouse pairings, try the natural-language search (e.g. <em>"red silk wedding"</em>) or the <em>Filters</em>, and tap <em>Check Catalog</em> to color-match a new photo. Ready to start your own collection?
+  </div>
+  <button class="btn-demo-start" onclick="exitDemo()">Start my own wardrobe →</button>
+</div>
+
 <div class="tabs">
   <button class="tab active" id="tab-catalog" onclick="switchView('catalog')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Catalog
@@ -301,6 +319,59 @@ let view = 'catalog', cat = 'sarees';
 let filtersOn = false, activeFilters = {};
 let editingId = null;
 let bulkItems = [];
+let isDemoMode = false;
+let demoDismissed = localStorage.getItem('wardrobe_demo_dismissed') === '1';
+
+/* ───────────────── Demo / walkthrough data ───────────────── */
+const DEMO_HEX = { Blue:'#2c6fd6', Gold:'#d4af37', Red:'#c8102e', Emerald:'#0f9b6c', Peach:'#ffb59a', Cream:'#f5ecd2', Mustard:'#d4a017', Maroon:'#6e1423', Lavender:'#b39ddb', Silver:'#c9c9d1', Teal:'#0f8a8a', Magenta:'#c026a6', Pink:'#ec4899', Navy:'#1b2a52', Black:'#1a1a1a' };
+function demoSvg(body, border, label) {
+  const b = DEMO_HEX[body] || '#cccccc', br = DEMO_HEX[border] || '#999999';
+  const s = `<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${b}'/><stop offset='1' stop-color='${b}' stop-opacity='0.78'/></linearGradient></defs><rect width='300' height='400' fill='url(#g)'/><rect width='300' height='22' fill='${br}'/><rect y='378' width='300' height='22' fill='${br}'/><rect width='16' height='400' fill='${br}'/><rect x='284' width='16' height='400' fill='${br}'/><g fill='${br}' opacity='0.85'><circle cx='60' cy='120' r='7'/><circle cx='150' cy='90' r='7'/><circle cx='240' cy='150' r='7'/><circle cx='90' cy='220' r='7'/><circle cx='210' cy='260' r='7'/><circle cx='150' cy='320' r='7'/></g><text x='150' y='205' font-family='Georgia,serif' font-size='20' fill='#ffffff' text-anchor='middle' opacity='0.92'>${label}</text></svg>`;
+  return 'data:image/svg+xml;base64,' + btoa(s);
+}
+const DEMO_SAREES = [
+  { id: 1, name: 'Royal Blue Banarasi', saree_name: 'Royal Banarasi', body_color: 'Blue', border_color: 'Gold', region_name: 'Banarasi', color: 'Blue', fabric: 'Silk', occasion: 'Wedding', price: '₹18,000', purchase_date: '2025-11-02', notes: 'Bought in Varanasi' },
+  { id: 2, name: 'Crimson Kanjivaram', saree_name: 'Temple Red', body_color: 'Red', border_color: 'Gold', region_name: 'Kanjivaram', color: 'Red', fabric: 'Silk', occasion: 'Wedding', price: '₹24,000', purchase_date: '2024-10-18', notes: '' },
+  { id: 3, name: 'Emerald Festive Silk', saree_name: '', body_color: 'Emerald', border_color: 'Gold', region_name: 'Mysore', color: 'Green', fabric: 'Silk', occasion: 'Festival', price: '₹12,500', purchase_date: '2025-08-30', notes: '' },
+  { id: 4, name: 'Peach Chiffon Drape', saree_name: 'Sunset Peach', body_color: 'Peach', border_color: 'Cream', region_name: '', color: 'Peach', fabric: 'Chiffon', occasion: 'Party', price: '₹4,200', purchase_date: '2026-01-12', notes: '' },
+  { id: 5, name: 'Mustard Cotton Daily', saree_name: '', body_color: 'Mustard', border_color: 'Maroon', region_name: 'Sambalpuri', color: 'Mustard', fabric: 'Cotton', occasion: 'Casual', price: '₹1,800', purchase_date: '2025-06-05', notes: '' },
+  { id: 6, name: 'Lavender Georgette', saree_name: '', body_color: 'Lavender', border_color: 'Silver', region_name: '', color: 'Lavender', fabric: 'Georgette', occasion: 'Party', price: '₹5,600', purchase_date: '2025-12-21', notes: '' },
+  { id: 7, name: 'Teal Patola Heirloom', saree_name: "Grandma's Patola", body_color: 'Teal', border_color: 'Magenta', region_name: 'Patola', color: 'Teal', fabric: 'Silk', occasion: 'Festival', price: '₹32,000', purchase_date: '2023-04-09', notes: 'Family heirloom' },
+  { id: 8, name: 'Blush Pink Chanderi', saree_name: '', body_color: 'Pink', border_color: 'Gold', region_name: 'Chanderi', color: 'Pink', fabric: 'Cotton Silk', occasion: 'Traditional', price: '₹6,900', purchase_date: '2025-09-14', notes: '' },
+].map(s => ({ ...s, image: demoSvg(s.body_color, s.border_color, s.body_color) }));
+const DEMO_BLOUSES = [
+  { id: 1, name: 'Gold Silk Blouse', color: 'Gold', fabric: 'Silk', occasion: 'Wedding', price: '₹1,500', purchase_date: '2025-11-02', notes: '' },
+  { id: 2, name: 'Red Cotton Blouse', color: 'Red', fabric: 'Cotton', occasion: 'Casual', price: '₹600', purchase_date: '2025-06-05', notes: '' },
+  { id: 3, name: 'Black Velvet Blouse', color: 'Black', fabric: 'Velvet', occasion: 'Party', price: '₹1,200', purchase_date: '2025-12-01', notes: '' },
+  { id: 4, name: 'Cream Brocade Blouse', color: 'Cream', fabric: 'Brocade', occasion: 'Festival', price: '₹1,800', purchase_date: '2025-08-30', notes: '' },
+  { id: 5, name: 'Navy Raw Silk Blouse', color: 'Navy', fabric: 'Silk', occasion: 'Formal', price: '₹1,100', purchase_date: '2025-07-19', notes: '' },
+].map(b => ({ ...b, image: demoSvg(b.color, b.color, b.color) }));
+const DEMO_OUTFITS = [
+  { id: 1, name: 'Reception Look', saree_id: 1, blouse_id: 1, occasion: 'Wedding', last_worn: '2025-11-05' },
+  { id: 2, name: 'Diwali Festive', saree_id: 3, blouse_id: 4, occasion: 'Festival', last_worn: '2025-10-31' },
+  { id: 3, name: 'Sangeet Night', saree_id: 7, blouse_id: 3, occasion: 'Party', last_worn: '' },
+];
+
+function enterDemo() {
+  isDemoMode = true;
+  sarees = DEMO_SAREES.map(s => ({ ...s }));
+  blouses = DEMO_BLOUSES.map(b => ({ ...b }));
+  outfits = DEMO_OUTFITS.map(o => ({ ...o }));
+  document.getElementById('demoBanner').classList.add('show');
+  buildFilters();
+  render(); renderOutfits();
+}
+function markDemoDone() {
+  isDemoMode = false; demoDismissed = true;
+  localStorage.setItem('wardrobe_demo_dismissed', '1');
+  document.getElementById('demoBanner').classList.remove('show');
+}
+function exitDemo() {
+  markDemoDone();
+  sarees = []; blouses = []; outfits = [];
+  switchView('catalog');
+  return loadAll();
+}
 
 async function api(path, opts = {}) {
   const res = await fetch(path, {
@@ -324,6 +395,7 @@ function toast(msg, type = '') {
 async function loadAll() {
   try {
     [sarees, blouses, outfits] = await Promise.all([api('/sarees'), api('/blouses'), api('/outfits')]);
+    if (!demoDismissed && sarees.length === 0 && blouses.length === 0 && outfits.length === 0) { enterDemo(); return; }
     render(); renderOutfits();
   } catch (e) { toast('Could not load data: ' + e.message, 'err'); }
 }
@@ -640,12 +712,15 @@ function cardHtml(it) {
   const sub = cat === 'sarees'
     ? (it.saree_name || it.color || '')
     : (it.color || '');
-  return `<div class="card">
-    ${img}
-    <div class="card-actions">
+  const actions = isDemoMode
+    ? `<span class="sample-badge">Sample</span>`
+    : `<div class="card-actions">
       <button class="act edit" onclick="openEdit(${it.id})" title="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg></button>
       <button class="act del" onclick="deleteItem(${it.id})" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-    </div>
+    </div>`;
+  return `<div class="card">
+    ${img}
+    ${actions}
     <div class="card-body">
       <div class="card-name">${esc(it.name || 'Untitled')}</div>
       ${sub ? `<div class="card-sub">${esc(sub)}</div>` : ''}
@@ -704,6 +779,7 @@ function onFormUrl(v) {
 }
 
 function openAdd() {
+  if (isDemoMode) exitDemo();
   editingId = null;
   document.getElementById('itemModalTitle').textContent = cat === 'sarees' ? 'Add Saree' : 'Add Blouse';
   buildItemForm({});
@@ -748,7 +824,7 @@ async function deleteItem(id) {
 }
 
 /* ───────────────── Bulk upload ───────────────── */
-function openBulk() { bulkItems = []; document.getElementById('bulkList').innerHTML = '<p class="hint" style="text-align:center">No images yet — choose some above.</p>'; show('bulkModal'); }
+function openBulk() { if (isDemoMode) exitDemo(); bulkItems = []; document.getElementById('bulkList').innerHTML = '<p class="hint" style="text-align:center">No images yet — choose some above.</p>'; show('bulkModal'); }
 
 async function handleBulkFiles(e) {
   const files = [...e.target.files];
@@ -868,6 +944,7 @@ function sameFamily(a, b) {
 
 /* ───────────────── Outfits ───────────────── */
 function openOutfit() {
+  if (isDemoMode) { exitDemo(); toast('Start by adding your own sarees and blouses, then create outfits', ''); return; }
   if (!sarees.length || !blouses.length) { toast('Add at least one saree and one blouse first', 'err'); switchView('catalog'); return; }
   const form = document.getElementById('outfitForm');
   form.innerHTML = `
@@ -914,10 +991,10 @@ function outfitHtml(o) {
     <div class="outfit-body">
       <div class="outfit-name">${esc(o.name)}</div>
       <div class="outfit-meta">${o.occasion ? esc(o.occasion) + ' · ' : ''}${o.last_worn ? 'Last worn ' + esc(o.last_worn) : 'Never worn'}</div>
-      <div class="outfit-btns">
+      ${isDemoMode ? `<div class="outfit-meta" style="margin-top:0.55rem;color:var(--purple);font-weight:700">✦ Sample outfit</div>` : `<div class="outfit-btns">
         <button class="obtn worn" onclick="markWorn(${o.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Worn Today</button>
         <button class="obtn del-o" onclick="deleteOutfit(${o.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Delete</button>
-      </div>
+      </div>`}
     </div>
   </div>`;
 }
@@ -935,7 +1012,9 @@ async function deleteOutfit(id) {
 /* ───────────────── Export / Import ───────────────── */
 async function exportData() {
   try {
-    const data = await api('/export');
+    const data = isDemoMode
+      ? { exported_at: new Date().toISOString(), sarees, blouses, outfits }
+      : await api('/export');
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -948,6 +1027,7 @@ async function exportData() {
 
 async function importData(e) {
   const file = e.target.files[0]; if (!file) return;
+  if (isDemoMode) markDemoDone();
   try {
     const text = await file.text();
     const data = JSON.parse(text);

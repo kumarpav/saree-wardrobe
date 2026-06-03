@@ -1,0 +1,205 @@
+{
+  "exported_at": "2026-06-03T00:00:00",
+  "sarees": [
+    {
+      "id": 1,
+      "name": "Royal Blue Banarasi",
+      "saree_name": "Royal Banarasi",
+      "body_color": "Blue",
+      "border_color": "Gold",
+      "region_name": "Banarasi",
+      "color": "Blue",
+      "fabric": "Silk",
+      "occasion": "Wedding",
+      "price": "\u20b918,000",
+      "purchase_date": "2025-11-02",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyYzZmZDYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyYzZmZDYiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2Q0YWYzNyIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Q0YWYzNyIvPgo8ZyBmaWxsPSIjZDRhZjM3IiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5CbHVlPC90ZXh0Pgo8L3N2Zz4="
+    },
+    {
+      "id": 2,
+      "name": "Crimson Kanjivaram",
+      "saree_name": "Temple Red",
+      "body_color": "Red",
+      "border_color": "Gold",
+      "region_name": "Kanjivaram",
+      "color": "Red",
+      "fabric": "Silk",
+      "occasion": "Wedding",
+      "price": "\u20b924,000",
+      "purchase_date": "2024-10-18",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNjODEwMmUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjODEwMmUiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2Q0YWYzNyIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Q0YWYzNyIvPgo8ZyBmaWxsPSIjZDRhZjM3IiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5SZWQ8L3RleHQ+Cjwvc3ZnPg=="
+    },
+    {
+      "id": 3,
+      "name": "Emerald Festive Silk",
+      "saree_name": "",
+      "body_color": "Emerald",
+      "border_color": "Gold",
+      "region_name": "Mysore",
+      "color": "Green",
+      "fabric": "Silk",
+      "occasion": "Festival",
+      "price": "\u20b912,500",
+      "purchase_date": "2025-08-30",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwZjliNmMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwZjliNmMiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2Q0YWYzNyIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Q0YWYzNyIvPgo8ZyBmaWxsPSIjZDRhZjM3IiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5FbWVyYWxkPC90ZXh0Pgo8L3N2Zz4="
+    },
+    {
+      "id": 4,
+      "name": "Peach Chiffon Drape",
+      "saree_name": "Sunset Peach",
+      "body_color": "Peach",
+      "border_color": "Cream",
+      "region_name": "",
+      "color": "Peach",
+      "fabric": "Chiffon",
+      "occasion": "Party",
+      "price": "\u20b94,200",
+      "purchase_date": "2026-01-12",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmI1OWEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmI1OWEiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZjVlY2QyIi8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2Y1ZWNkMiIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjZjVlY2QyIi8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y1ZWNkMiIvPgo8ZyBmaWxsPSIjZjVlY2QyIiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5QZWFjaDwvdGV4dD4KPC9zdmc+"
+    },
+    {
+      "id": 5,
+      "name": "Mustard Cotton Daily",
+      "saree_name": "",
+      "body_color": "Mustard",
+      "border_color": "Maroon",
+      "region_name": "Sambalpuri",
+      "color": "Mustard",
+      "fabric": "Cotton",
+      "occasion": "Casual",
+      "price": "\u20b91,800",
+      "purchase_date": "2025-06-05",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNkNGEwMTciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkNGEwMTciIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjNmUxNDIzIi8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iIzZlMTQyMyIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjNmUxNDIzIi8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzZlMTQyMyIvPgo8ZyBmaWxsPSIjNmUxNDIzIiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5NdXN0YXJkPC90ZXh0Pgo8L3N2Zz4="
+    },
+    {
+      "id": 6,
+      "name": "Lavender Georgette",
+      "saree_name": "",
+      "body_color": "Lavender",
+      "border_color": "Silver",
+      "region_name": "",
+      "color": "Lavender",
+      "fabric": "Georgette",
+      "occasion": "Party",
+      "price": "\u20b95,600",
+      "purchase_date": "2025-12-21",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiMzlkZGIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiMzlkZGIiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjYzljOWQxIi8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2M5YzlkMSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjYzljOWQxIi8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2M5YzlkMSIvPgo8ZyBmaWxsPSIjYzljOWQxIiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5MYXZlbmRlcjwvdGV4dD4KPC9zdmc+"
+    },
+    {
+      "id": 7,
+      "name": "Teal Patola Heirloom",
+      "saree_name": "Grandma's Patola",
+      "body_color": "Teal",
+      "border_color": "Magenta",
+      "region_name": "Patola",
+      "color": "Teal",
+      "fabric": "Silk",
+      "occasion": "Festival",
+      "price": "\u20b932,000",
+      "purchase_date": "2023-04-09",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwZjhhOGEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwZjhhOGEiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjYzAyNmE2Ii8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2MwMjZhNiIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjYzAyNmE2Ii8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2MwMjZhNiIvPgo8ZyBmaWxsPSIjYzAyNmE2IiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5UZWFsPC90ZXh0Pgo8L3N2Zz4="
+    },
+    {
+      "id": 8,
+      "name": "Blush Pink Chanderi",
+      "saree_name": "",
+      "body_color": "Pink",
+      "border_color": "Gold",
+      "region_name": "Chanderi",
+      "color": "Pink",
+      "fabric": "Chanderi",
+      "occasion": "Traditional",
+      "price": "\u20b96,900",
+      "purchase_date": "2025-09-14",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNlYzQ4OTkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlYzQ4OTkiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2Q0YWYzNyIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Q0YWYzNyIvPgo8ZyBmaWxsPSIjZDRhZjM3IiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5QaW5rPC90ZXh0Pgo8L3N2Zz4="
+    }
+  ],
+  "blouses": [
+    {
+      "id": 1,
+      "name": "Gold Silk Blouse",
+      "color": "Gold",
+      "fabric": "Silk",
+      "occasion": "Wedding",
+      "price": "\u20b91,500",
+      "purchase_date": "2025-11-02",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNkNGFmMzciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkNGFmMzciIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2Q0YWYzNyIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjZDRhZjM3Ii8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Q0YWYzNyIvPgo8ZyBmaWxsPSIjZDRhZjM3IiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5Hb2xkPC90ZXh0Pgo8L3N2Zz4="
+    },
+    {
+      "id": 2,
+      "name": "Red Cotton Blouse",
+      "color": "Red",
+      "fabric": "Cotton",
+      "occasion": "Casual",
+      "price": "\u20b9600",
+      "purchase_date": "2025-06-05",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNjODEwMmUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjODEwMmUiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjYzgxMDJlIi8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2M4MTAyZSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjYzgxMDJlIi8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2M4MTAyZSIvPgo8ZyBmaWxsPSIjYzgxMDJlIiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5SZWQ8L3RleHQ+Cjwvc3ZnPg=="
+    },
+    {
+      "id": 3,
+      "name": "Black Velvet Blouse",
+      "color": "Black",
+      "fabric": "Velvet",
+      "occasion": "Party",
+      "price": "\u20b91,200",
+      "purchase_date": "2025-12-01",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxYTFhMWEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxYTFhMWEiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjMWExYTFhIi8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iIzFhMWExYSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjMWExYTFhIi8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzFhMWExYSIvPgo8ZyBmaWxsPSIjMWExYTFhIiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5CbGFjazwvdGV4dD4KPC9zdmc+"
+    },
+    {
+      "id": 4,
+      "name": "Cream Brocade Blouse",
+      "color": "Cream",
+      "fabric": "Brocade",
+      "occasion": "Festival",
+      "price": "\u20b91,800",
+      "purchase_date": "2025-08-30",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWVjZDIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmNWVjZDIiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjZjVlY2QyIi8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iI2Y1ZWNkMiIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjZjVlY2QyIi8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y1ZWNkMiIvPgo8ZyBmaWxsPSIjZjVlY2QyIiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5DcmVhbTwvdGV4dD4KPC9zdmc+"
+    },
+    {
+      "id": 5,
+      "name": "Navy Raw Silk Blouse",
+      "color": "Navy",
+      "fabric": "Silk",
+      "occasion": "Formal",
+      "price": "\u20b91,100",
+      "purchase_date": "2025-07-19",
+      "notes": "",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMzAwIDQwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxYjJhNTIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxYjJhNTIiIHN0b3Atb3BhY2l0eT0iMC43OCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0idXJsKCNnKSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjMWIyYTUyIi8+CjxyZWN0IHg9IjAiIHk9IjM3OCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMiIgZmlsbD0iIzFiMmE1MiIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYiIGhlaWdodD0iNDAwIiBmaWxsPSIjMWIyYTUyIi8+CjxyZWN0IHg9IjI4NCIgeT0iMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzFiMmE1MiIvPgo8ZyBmaWxsPSIjMWIyYTUyIiBvcGFjaXR5PSIwLjg1Ij4KPGNpcmNsZSBjeD0iNjAiIGN5PSIxMjAiIHI9IjciLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjI0MCIgY3k9IjE1MCIgcj0iNyIvPgo8Y2lyY2xlIGN4PSI5MCIgY3k9IjIyMCIgcj0iNyIvPjxjaXJjbGUgY3g9IjIxMCIgY3k9IjI2MCIgcj0iNyIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjMyMCIgcj0iNyIvPjwvZz4KPHRleHQgeD0iMTUwIiB5PSIyMDUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjkyIj5OYXZ5PC90ZXh0Pgo8L3N2Zz4="
+    }
+  ],
+  "outfits": [
+    {
+      "name": "Reception Look",
+      "saree_id": 1,
+      "blouse_id": 1,
+      "occasion": "Wedding",
+      "last_worn": "2025-11-05"
+    },
+    {
+      "name": "Diwali Festive",
+      "saree_id": 3,
+      "blouse_id": 4,
+      "occasion": "Festival",
+      "last_worn": "2025-10-31"
+    },
+    {
+      "name": "Sangeet Night",
+      "saree_id": 7,
+      "blouse_id": 3,
+      "occasion": "Party",
+      "last_worn": ""
+    }
+  ]
+}
