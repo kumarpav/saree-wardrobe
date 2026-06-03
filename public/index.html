@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saree Wardrobe</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pink: #d6477f; --pink-light: #f06ba0; --purple: #7c3aed; --purple-light: #a855f7;
+    --grad: linear-gradient(135deg, #d6477f 0%, #7c3aed 100%);
+    --grad-soft: linear-gradient(135deg, #fdf2f8 0%, #f5f0ff 100%);
+    --ink: #2a1a33; --muted: #8a7a92; --line: #efe3f3; --card: #ffffff;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--grad-soft); color: var(--ink); min-height: 100dvh; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 30; background: var(--grad); color: #fff; box-shadow: 0 2px 18px rgba(124,58,237,0.25); }
+  .header-inner { max-width: 1280px; margin: 0 auto; padding: 0.7rem 1.1rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+  .brand { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.4px; display: flex; align-items: center; gap: 0.5rem; margin-right: auto; }
+  .brand .dot { font-size: 1.3rem; }
+  .hbtn { background: rgba(255,255,255,0.16); color: #fff; border: 1px solid rgba(255,255,255,0.28); border-radius: 9px; padding: 0.45rem 0.7rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; transition: background 0.15s; }
+  .hbtn:hover { background: rgba(255,255,255,0.3); }
+  .hbtn svg { width: 15px; height: 15px; }
+
+  /* Tabs */
+  .tabs { max-width: 1280px; margin: 0 auto; padding: 1rem 1.1rem 0; display: flex; gap: 0.5rem; }
+  .tab { background: transparent; border: none; padding: 0.6rem 1.05rem; font-size: 0.92rem; font-weight: 700; color: var(--muted); cursor: pointer; border-radius: 10px 10px 0 0; transition: all 0.15s; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .tab:hover { color: var(--pink); }
+  .tab.active { color: var(--purple); background: var(--card); box-shadow: 0 -2px 10px rgba(124,58,237,0.06); }
+  .tab svg { width: 17px; height: 17px; }
+
+  main { max-width: 1280px; margin: 0 auto; padding: 1.1rem; }
+
+  /* Toolbar */
+  .toolbar { background: var(--card); border-radius: 16px; padding: 1rem; box-shadow: 0 4px 20px rgba(124,58,237,0.07); margin-bottom: 1.1rem; }
+  .nl-row { display: flex; gap: 0.55rem; align-items: stretch; }
+  .nl-input { flex: 1; border: 2px solid var(--line); border-radius: 12px; padding: 0.7rem 0.95rem; font-size: 0.95rem; outline: none; transition: border 0.15s; }
+  .nl-input:focus { border-color: var(--purple-light); }
+  .icon-btn { border: none; border-radius: 12px; padding: 0 0.95rem; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; transition: all 0.15s; }
+  .icon-btn svg { width: 16px; height: 16px; }
+  .btn-grad { background: var(--grad); color: #fff; }
+  .btn-grad:hover { filter: brightness(1.06); }
+  .btn-line { background: #fff; color: var(--purple); border: 2px solid var(--line); }
+  .btn-line:hover { border-color: var(--purple-light); }
+  .btn-line.on { background: var(--purple); color: #fff; border-color: var(--purple); }
+
+  .sub-row { display: flex; gap: 0.55rem; align-items: center; margin-top: 0.7rem; flex-wrap: wrap; }
+  .search-wrap { position: relative; flex: 1; min-width: 180px; }
+  .search-wrap svg { position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--muted); }
+  .search-wrap input { width: 100%; border: 2px solid var(--line); border-radius: 10px; padding: 0.55rem 0.7rem 0.55rem 2.1rem; font-size: 0.88rem; outline: none; }
+  .search-wrap input:focus { border-color: var(--purple-light); }
+  .count-pill { font-size: 0.78rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
+
+  /* Filters panel */
+  .filters { display: none; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.7rem; margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--line); }
+  .filters.show { display: grid; }
+  .filters label { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 0.3rem; }
+  .filters select { width: 100%; border: 2px solid var(--line); border-radius: 9px; padding: 0.45rem 0.55rem; font-size: 0.85rem; background: #fff; outline: none; cursor: pointer; }
+  .filters .clear-cell { grid-column: 1 / -1; }
+
+  /* Grid */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+  @media (min-width: 560px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 820px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 1080px) { .grid { grid-template-columns: repeat(5, 1fr); } }
+
+  .card { background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 3px 14px rgba(124,58,237,0.08); position: relative; transition: transform 0.15s, box-shadow 0.15s; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(124,58,237,0.16); }
+  .card-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: var(--grad-soft); display: block; }
+  .card-ph { width: 100%; aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; background: var(--grad-soft); color: var(--purple-light); font-size: 2.4rem; }
+  .card-body { padding: 0.6rem 0.7rem 0.7rem; }
+  .card-name { font-size: 0.88rem; font-weight: 700; line-height: 1.25; }
+  .card-sub { font-size: 0.74rem; color: var(--muted); margin-top: 0.2rem; line-height: 1.3; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.4rem; }
+  .chip { font-size: 0.64rem; font-weight: 700; padding: 0.13rem 0.42rem; border-radius: 20px; background: #f6eefb; color: var(--purple); }
+  .swatches { display: flex; gap: 0.25rem; margin-top: 0.4rem; align-items: center; }
+  .sw { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.08); }
+  .card-actions { position: absolute; top: 0.5rem; right: 0.5rem; display: flex; gap: 0.3rem; opacity: 0; transition: opacity 0.15s; }
+  .card:hover .card-actions { opacity: 1; }
+  .act { width: 28px; height: 28px; border-radius: 8px; border: none; background: rgba(255,255,255,0.95); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+  .act svg { width: 15px; height: 15px; }
+  .act.edit { color: var(--purple); }
+  .act.del { color: #e04060; }
+  .act:hover { background: #fff; transform: scale(1.08); }
+
+  /* Empty state */
+  .empty { text-align: center; padding: 4rem 1rem; color: var(--muted); }
+  .empty .ic { font-size: 3.5rem; margin-bottom: 0.8rem; }
+  .empty h3 { color: var(--ink); font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .empty p { font-size: 0.9rem; line-height: 1.6; }
+
+  /* Modal */
+  .overlay { position: fixed; inset: 0; background: rgba(42,26,51,0.55); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; z-index: 50; padding: 1rem; }
+  .overlay.show { display: flex; }
+  .modal { background: #fff; border-radius: 18px; width: 100%; max-width: 560px; max-height: 90dvh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .modal.wide { max-width: 880px; }
+  .modal-head { padding: 1rem 1.2rem; background: var(--grad); color: #fff; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .modal-head h2 { font-size: 1.05rem; font-weight: 800; }
+  .modal-x { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; line-height: 1; }
+  .modal-x:hover { background: rgba(255,255,255,0.35); }
+  .modal-body { padding: 1.1rem 1.2rem; overflow-y: auto; flex: 1; }
+  .modal-foot { padding: 0.85rem 1.2rem; border-top: 1px solid var(--line); display: flex; gap: 0.6rem; justify-content: flex-end; flex-shrink: 0; background: #fff; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 0.8rem; }
+  .field { display: flex; flex-direction: column; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 0.72rem; font-weight: 700; color: var(--muted); margin-bottom: 0.25rem; }
+  .field label .req { color: var(--pink); }
+  .field input, .field select, .field textarea { border: 2px solid var(--line); border-radius: 9px; padding: 0.5rem 0.6rem; font-size: 0.88rem; outline: none; font-family: inherit; transition: border 0.15s; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--purple-light); }
+  .field textarea { resize: vertical; min-height: 56px; }
+
+  .img-drop { grid-column: 1 / -1; border: 2px dashed var(--line); border-radius: 12px; padding: 0.8rem; text-align: center; }
+  .img-preview { max-height: 150px; border-radius: 10px; margin: 0 auto 0.5rem; display: block; }
+  .upload-line { display: flex; gap: 0.5rem; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .file-label { background: #f6eefb; color: var(--purple); border-radius: 8px; padding: 0.45rem 0.8rem; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+  .file-label:hover { background: #efe0fb; }
+  .url-input { border: 2px solid var(--line); border-radius: 8px; padding: 0.42rem 0.55rem; font-size: 0.82rem; outline: none; min-width: 160px; flex: 1; }
+
+  .btn-cancel { background: #f3eef7; color: var(--muted); border: none; border-radius: 10px; padding: 0.6rem 1.1rem; font-weight: 700; font-size: 0.88rem; cursor: pointer; }
+  .btn-cancel:hover { background: #ebe3f2; }
+  .btn-save { background: var(--grad); color: #fff; border: none; border-radius: 10px; padding: 0.6rem 1.3rem; font-weight: 700; font-size: 0.88rem; cursor: pointer; }
+  .btn-save:hover { filter: brightness(1.06); }
+
+  /* Bulk upload */
+  .bulk-item { display: grid; grid-template-columns: 110px 1fr auto; gap: 0.8rem; padding: 0.8rem; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 0.8rem; align-items: start; }
+  .bulk-item img { width: 110px; height: 140px; object-fit: cover; border-radius: 9px; }
+  .bulk-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .bulk-fields .field label { font-size: 0.66rem; }
+  .bulk-fields .field input { padding: 0.4rem 0.5rem; font-size: 0.82rem; }
+  .bulk-del { background: #fdeaee; color: #e04060; border: none; border-radius: 8px; width: 32px; height: 32px; cursor: pointer; font-size: 1.1rem; }
+  .swatch-inline { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); vertical-align: middle; margin-right: 4px; }
+
+  /* Check catalog */
+  .check-result { margin-top: 1rem; }
+  .match-card { display: flex; gap: 0.8rem; align-items: center; padding: 0.7rem; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 0.6rem; }
+  .match-card img, .match-ph { width: 60px; height: 78px; border-radius: 8px; object-fit: cover; background: var(--grad-soft); display: flex; align-items: center; justify-content: center; color: var(--purple-light); font-size: 1.4rem; flex-shrink: 0; }
+  .match-pct { margin-left: auto; font-weight: 800; color: var(--purple); font-size: 1rem; text-align: right; }
+
+  /* Outfits */
+  .outfit-card { background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 3px 14px rgba(124,58,237,0.08); }
+  .outfit-pair { display: grid; grid-template-columns: 1fr 1fr; }
+  .outfit-pair .half { position: relative; }
+  .outfit-pair img, .outfit-pair .ph { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--grad-soft); display: flex; align-items: center; justify-content: center; color: var(--purple-light); font-size: 2rem; }
+  .outfit-tag { position: absolute; bottom: 0.3rem; left: 0.3rem; font-size: 0.6rem; font-weight: 700; background: rgba(0,0,0,0.55); color: #fff; padding: 0.12rem 0.4rem; border-radius: 5px; }
+  .outfit-body { padding: 0.7rem 0.8rem; }
+  .outfit-name { font-weight: 800; font-size: 0.95rem; }
+  .outfit-meta { font-size: 0.74rem; color: var(--muted); margin-top: 0.25rem; }
+  .outfit-btns { display: flex; gap: 0.4rem; margin-top: 0.6rem; }
+  .obtn { flex: 1; border: none; border-radius: 8px; padding: 0.42rem; font-size: 0.74rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; }
+  .obtn svg { width: 13px; height: 13px; }
+  .obtn.worn { background: #eafaf0; color: #1c9d5b; }
+  .obtn.del-o { background: #fdeaee; color: #e04060; }
+  .outfit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+
+  /* Toast */
+  .toast { position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%) translateY(120%); background: var(--ink); color: #fff; padding: 0.7rem 1.2rem; border-radius: 12px; font-size: 0.88rem; font-weight: 600; z-index: 100; transition: transform 0.3s; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.err { background: #c0334e; }
+  .toast.ok { background: #1c9d5b; }
+
+  .spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { display: flex; align-items: center; gap: 0.5rem; justify-content: center; color: var(--muted); padding: 2rem; font-weight: 600; }
+  .loading-text .spinner { border-color: rgba(124,58,237,0.25); border-top-color: var(--purple); }
+
+  .hint { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand"><span class="dot">🥻</span> Saree Wardrobe</div>
+    <button class="hbtn" onclick="openCheck()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Check Catalog</button>
+    <button class="hbtn" onclick="exportData()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
+    <button class="hbtn" onclick="document.getElementById('importFile').click()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Import</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importData(event)">
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" id="tab-catalog" onclick="switchView('catalog')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Catalog
+  </button>
+  <button class="tab" id="tab-outfits" onclick="switchView('outfits')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg> Outfits
+  </button>
+</div>
+
+<main>
+  <!-- CATALOG VIEW -->
+  <div id="view-catalog">
+    <!-- sub-tabs for saree/blouse -->
+    <div style="display:flex;gap:0.5rem;margin-bottom:0.9rem;">
+      <button class="icon-btn btn-line on" id="cat-sarees" onclick="switchCat('sarees')">Sarees</button>
+      <button class="icon-btn btn-line" id="cat-blouses" onclick="switchCat('blouses')">Blouses</button>
+      <button class="icon-btn btn-grad" style="margin-left:auto" onclick="openAdd()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span id="add-label">Add Saree</span></button>
+      <button class="icon-btn btn-line" id="bulk-btn" onclick="openBulk()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Bulk Upload</button>
+    </div>
+
+    <div class="toolbar">
+      <div class="nl-row">
+        <input class="nl-input" id="nlSearch" placeholder='Try: "show me all blue silk wedding sarees" or "red kanjivaram"' oninput="onNlInput()" onkeydown="if(event.key==='Enter')runNl()">
+        <button class="icon-btn btn-grad" id="nlBtn" onclick="runNl()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Search</button>
+      </div>
+      <div class="sub-row">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="quickSearch" placeholder="Quick search name, color, occasion…" oninput="render()">
+        </div>
+        <button class="icon-btn btn-line" id="filterToggle" onclick="toggleFilters()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Filters</button>
+        <span class="count-pill" id="countPill"></span>
+      </div>
+      <div class="filters" id="filtersPanel"></div>
+    </div>
+
+    <div id="catalogContent"></div>
+  </div>
+
+  <!-- OUTFITS VIEW -->
+  <div id="view-outfits" style="display:none">
+    <div style="display:flex;margin-bottom:1rem;">
+      <button class="icon-btn btn-grad" style="margin-left:auto" onclick="openOutfit()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Create Outfit</button>
+    </div>
+    <div id="outfitsContent"></div>
+  </div>
+</main>
+
+<!-- ADD/EDIT MODAL -->
+<div class="overlay" id="itemModal">
+  <div class="modal">
+    <div class="modal-head"><h2 id="itemModalTitle">Add Saree</h2><button class="modal-x" onclick="closeModal('itemModal')">&times;</button></div>
+    <div class="modal-body"><div class="form-grid" id="itemForm"></div></div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('itemModal')">Cancel</button>
+      <button class="btn-save" onclick="saveItem()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- BULK MODAL -->
+<div class="overlay" id="bulkModal">
+  <div class="modal wide">
+    <div class="modal-head"><h2>Bulk Upload Sarees</h2><button class="modal-x" onclick="closeModal('bulkModal')">&times;</button></div>
+    <div class="modal-body">
+      <div style="text-align:center;margin-bottom:0.8rem;">
+        <label class="file-label" for="bulkFile">📁 Choose Images</label>
+        <input type="file" id="bulkFile" accept="image/*" multiple style="display:none" onchange="handleBulkFiles(event)">
+        <p class="hint">Select multiple saree photos. Body &amp; border colors are detected automatically (k-means) — edit anything before saving. Only items with required fields (Name, Body Color, Color, Fabric) are saved.</p>
+      </div>
+      <div id="bulkList"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('bulkModal')">Cancel</button>
+      <button class="btn-save" id="bulkSaveBtn" onclick="saveBulk()">Save All</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHECK CATALOG MODAL -->
+<div class="overlay" id="checkModal">
+  <div class="modal">
+    <div class="modal-head"><h2>Check Catalog</h2><button class="modal-x" onclick="closeModal('checkModal')">&times;</button></div>
+    <div class="modal-body">
+      <p class="hint" style="margin-top:0">Upload a saree photo. We'll detect its colors and find similar sarees already in your catalog.</p>
+      <div style="text-align:center;margin:0.8rem 0;">
+        <label class="file-label" for="checkFile">📷 Upload Saree Photo</label>
+        <input type="file" id="checkFile" accept="image/*" style="display:none" onchange="handleCheckFile(event)">
+      </div>
+      <div id="checkResult" class="check-result"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('checkModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- OUTFIT MODAL -->
+<div class="overlay" id="outfitModal">
+  <div class="modal">
+    <div class="modal-head"><h2>Create Outfit</h2><button class="modal-x" onclick="closeModal('outfitModal')">&times;</button></div>
+    <div class="modal-body"><div class="form-grid" id="outfitForm"></div></div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('outfitModal')">Cancel</button>
+      <button class="btn-save" onclick="saveOutfit()">Save Outfit</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ───────────────── State & API ───────────────── */
+let TOKEN = localStorage.getItem('wardrobe_token');
+if (!TOKEN) { TOKEN = 'u_' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('wardrobe_token', TOKEN); }
+
+let sarees = [], blouses = [], outfits = [];
+let view = 'catalog', cat = 'sarees';
+let filtersOn = false, activeFilters = {};
+let editingId = null;
+let bulkItems = [];
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, {
+    ...opts,
+    headers: { 'Content-Type': 'application/json', 'X-User-Token': TOKEN, ...(opts.headers || {}) },
+  });
+  if (!res.ok) {
+    let msg = 'Request failed';
+    try { msg = (await res.json()).detail || msg; } catch (e) {}
+    throw new Error(msg);
+  }
+  return res.status === 204 ? null : res.json();
+}
+
+function toast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast ' + type, 2600);
+}
+
+async function loadAll() {
+  try {
+    [sarees, blouses, outfits] = await Promise.all([api('/sarees'), api('/blouses'), api('/outfits')]);
+    render(); renderOutfits();
+  } catch (e) { toast('Could not load data: ' + e.message, 'err'); }
+}
+
+/* ───────────────── Color detection (k-means) ───────────────── */
+const COLOR_NAMES = [
+  ['Black',[0,0,8]],['White',[0,0,96]],['Gray',[0,0,55]],['Silver',[0,5,78]],
+  ['Red',[0,80,52]],['Crimson',[348,83,47]],['Maroon',[0,70,30]],['Rust',[18,75,45]],
+  ['Orange',[28,90,55]],['Peach',[24,70,78]],['Coral',[12,80,65]],['Gold',[45,80,52]],
+  ['Golden',[48,85,55]],['Mustard',[45,75,48]],['Yellow',[55,90,58]],['Cream',[48,55,90]],
+  ['Beige',[40,30,80]],['Olive',[70,60,35]],['Lime',[85,75,52]],['Green',[130,65,42]],
+  ['Emerald',[150,70,42]],['Teal',[178,65,40]],['Turquoise',[174,70,55]],['Cyan',[185,75,55]],
+  ['SkyBlue',[200,75,68]],['Blue',[220,75,50]],['Navy',[222,70,28]],['Royal',[225,80,48]],
+  ['Indigo',[245,65,42]],['Purple',[275,60,48]],['Violet',[270,70,60]],['Lavender',[265,45,78]],
+  ['Magenta',[300,75,50]],['Pink',[330,75,72]],['Rose',[345,65,62]],['HotPink',[325,85,60]],
+  ['Fuchsia',[315,80,55]],['Brown',[25,55,35]],['Tan',[33,45,62]],['Wine',[345,60,30]],
+];
+
+function rgb2hsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b);
+  let h = 0, s = 0, l = (mx + mn) / 2;
+  if (mx !== mn) {
+    const d = mx - mn;
+    s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
+    if (mx === r) h = (g - b) / d + (g < b ? 6 : 0);
+    else if (mx === g) h = (b - r) / d + 2;
+    else h = (r - g) / d + 4;
+    h /= 6;
+  }
+  return [h * 360, s * 100, l * 100];
+}
+
+function nameColor(r, g, b) {
+  const [h, s, l] = rgb2hsl(r, g, b);
+  let best = 'Unknown', bestD = Infinity;
+  for (const [name, [ch, cs, cl]] of COLOR_NAMES) {
+    let dh = Math.abs(h - ch); if (dh > 180) dh = 360 - dh;
+    // Hue matters less for near-gray colors
+    const hueWeight = (s < 12 || cs < 12) ? 0.15 : 1;
+    const d = (dh * hueWeight) ** 2 + ((s - cs) * 1.1) ** 2 + ((l - cl) * 1.3) ** 2;
+    if (d < bestD) { bestD = d; best = name; }
+  }
+  return best;
+}
+
+function isBackground(r, g, b) {
+  const [, s, l] = rgb2hsl(r, g, b);
+  return (l > 90 && s < 12) || (l < 6); // near-white or near-black backgrounds
+}
+
+// simple k-means on an array of [r,g,b]
+function kmeans(points, k = 3, iters = 8) {
+  if (points.length === 0) return [];
+  let centroids = [];
+  for (let i = 0; i < k; i++) centroids.push(points[Math.floor(Math.random() * points.length)].slice());
+  let assign = new Array(points.length).fill(0);
+  for (let it = 0; it < iters; it++) {
+    for (let i = 0; i < points.length; i++) {
+      let bd = Infinity, bc = 0;
+      for (let c = 0; c < k; c++) {
+        const dr = points[i][0] - centroids[c][0], dg = points[i][1] - centroids[c][1], db = points[i][2] - centroids[c][2];
+        const d = dr * dr + dg * dg + db * db;
+        if (d < bd) { bd = d; bc = c; }
+      }
+      assign[i] = bc;
+    }
+    const sums = Array.from({ length: k }, () => [0, 0, 0, 0]);
+    for (let i = 0; i < points.length; i++) {
+      const c = assign[i]; sums[c][0] += points[i][0]; sums[c][1] += points[i][1]; sums[c][2] += points[i][2]; sums[c][3]++;
+    }
+    for (let c = 0; c < k; c++) if (sums[c][3] > 0) centroids[c] = [sums[c][0] / sums[c][3], sums[c][1] / sums[c][3], sums[c][2] / sums[c][3], sums[c][3]];
+  }
+  // attach counts
+  const counts = new Array(k).fill(0);
+  for (const a of assign) counts[a]++;
+  return centroids.map((c, i) => ({ rgb: [Math.round(c[0]), Math.round(c[1]), Math.round(c[2])], count: counts[i] }));
+}
+
+function mostSaturated(clusters) {
+  let best = null, bestScore = -1;
+  for (const c of clusters) {
+    if (c.count === 0) continue;
+    const [, s, l] = rgb2hsl(...c.rgb);
+    if (l > 92 || l < 8) continue;
+    const score = s * Math.log(c.count + 2);
+    if (score > bestScore) { bestScore = score; best = c; }
+  }
+  return best || clusters.sort((a, b) => b.count - a.count)[0];
+}
+
+// returns {bodyColor, borderColor, bodyRgb, borderRgb}
+function detectColors(img) {
+  const W = 120, H = 160;
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const ctx = cv.getContext('2d');
+  ctx.drawImage(img, 0, 0, W, H);
+  const data = ctx.getImageData(0, 0, W, H).data;
+
+  const center = [], edge = [];
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = (y * W + x) * 4;
+      const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+      if (a < 200 || isBackground(r, g, b)) continue;
+      const cx = Math.abs(x - W / 2) / (W / 2), cy = Math.abs(y - H / 2) / (H / 2);
+      const dist = Math.max(cx, cy);
+      if (dist < 0.5) center.push([r, g, b]);
+      else if (dist > 0.72) edge.push([r, g, b]);
+    }
+  }
+  const bodyClusters = kmeans(center.length ? center : edge, 3);
+  const borderClusters = kmeans(edge.length ? edge : center, 3);
+  const body = mostSaturated(bodyClusters);
+  const border = mostSaturated(borderClusters);
+  return {
+    bodyRgb: body ? body.rgb : [180, 180, 180],
+    borderRgb: border ? border.rgb : [180, 180, 180],
+    bodyColor: body ? nameColor(...body.rgb) : '',
+    borderColor: border ? nameColor(...border.rgb) : '',
+  };
+}
+
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+function colorHex(name) {
+  const m = COLOR_NAMES.find(c => c[0].toLowerCase() === (name || '').toLowerCase());
+  if (!m) return '#ccc';
+  const [h, s, l] = m[1];
+  return hsl2hex(h, s, l);
+}
+function hsl2hex(h, s, l) {
+  s /= 100; l /= 100;
+  const k = n => (n + h / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+  const to = x => Math.round(255 * x).toString(16).padStart(2, '0');
+  return '#' + to(f(0)) + to(f(8)) + to(f(4));
+}
+
+/* ───────────────── Views ───────────────── */
+function switchView(v) {
+  view = v;
+  document.getElementById('view-catalog').style.display = v === 'catalog' ? '' : 'none';
+  document.getElementById('view-outfits').style.display = v === 'outfits' ? '' : 'none';
+  document.getElementById('tab-catalog').classList.toggle('active', v === 'catalog');
+  document.getElementById('tab-outfits').classList.toggle('active', v === 'outfits');
+  if (v === 'outfits') renderOutfits();
+}
+
+function switchCat(c) {
+  cat = c;
+  document.getElementById('cat-sarees').classList.toggle('on', c === 'sarees');
+  document.getElementById('cat-blouses').classList.toggle('on', c === 'blouses');
+  document.getElementById('add-label').textContent = c === 'sarees' ? 'Add Saree' : 'Add Blouse';
+  document.getElementById('bulk-btn').style.display = c === 'sarees' ? '' : 'none';
+  activeFilters = {};
+  buildFilters();
+  render();
+}
+
+/* ───────────────── Filters ───────────────── */
+function toggleFilters() {
+  filtersOn = !filtersOn;
+  document.getElementById('filtersPanel').classList.toggle('show', filtersOn);
+  document.getElementById('filterToggle').classList.toggle('on', filtersOn || hasActiveFilters());
+  if (filtersOn) buildFilters();
+}
+function hasActiveFilters() { return Object.values(activeFilters).some(v => v); }
+
+function uniqueVals(items, field) {
+  return [...new Set(items.map(i => (i[field] || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+}
+
+function buildFilters() {
+  const panel = document.getElementById('filtersPanel');
+  const items = cat === 'sarees' ? sarees : blouses;
+  let fields;
+  if (cat === 'sarees') fields = [['body_color', 'Body Color'], ['border_color', 'Border Color'], ['region_name', 'Region'], ['color', 'Color'], ['fabric', 'Fabric'], ['occasion', 'Occasion']];
+  else fields = [['color', 'Color'], ['fabric', 'Fabric'], ['occasion', 'Occasion']];
+  let html = '';
+  for (const [f, label] of fields) {
+    const vals = uniqueVals(items, f);
+    html += `<div><label>${label}</label><select onchange="setFilter('${f}', this.value)"><option value="">All</option>` +
+      vals.map(v => `<option value="${esc(v)}" ${activeFilters[f] === v ? 'selected' : ''}>${esc(v)}</option>`).join('') + `</select></div>`;
+  }
+  html += `<div class="clear-cell"><button class="icon-btn btn-line" onclick="clearFilters()" style="padding:0.45rem 0.9rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Clear All Filters</button></div>`;
+  panel.innerHTML = html;
+}
+function setFilter(field, val) { if (val) activeFilters[field] = val; else delete activeFilters[field]; render(); document.getElementById('filterToggle').classList.toggle('on', filtersOn || hasActiveFilters()); }
+function clearFilters() { activeFilters = {}; buildFilters(); render(); document.getElementById('filterToggle').classList.toggle('on', filtersOn); }
+
+/* ───────────────── Natural language search ───────────────── */
+const NL_COLORS = ['red','crimson','maroon','rust','orange','peach','coral','gold','golden','mustard','yellow','cream','beige','olive','lime','green','emerald','teal','turquoise','cyan','sky','blue','navy','royal','indigo','purple','violet','lavender','magenta','pink','rose','fuchsia','brown','tan','wine','black','white','gray','grey','silver'];
+const NL_FABRICS = ['silk','cotton','chiffon','georgette','banarasi','kanjivaram','linen','crepe','satin','velvet','organza','tussar','net','brocade'];
+const NL_REGIONS = ['kanjivaram','banarasi','chanderi','paithani','patola','pochampally','sambalpuri','bandhani','ikat','jamdani','mysore','dharmavaram'];
+const NL_OCCASIONS = ['wedding','party','festival','festive','casual','formal','traditional','office','daily','reception','engagement'];
+
+function onNlInput() {
+  const v = document.getElementById('nlSearch').value.trim();
+  if (!v) { nlQuery = null; render(); }
+}
+
+function runNl() {
+  const q = document.getElementById('nlSearch').value.toLowerCase().trim();
+  if (!q) { activeFilters = {}; document.getElementById('quickSearch').value = ''; buildFilters(); render(); return; }
+  activeFilters = {};
+  const found = { colors: [], fabric: null, region: null, occasion: null };
+  for (const f of NL_FABRICS) if (q.includes(f)) { found.fabric = f; break; }
+  for (const r of NL_REGIONS) if (q.includes(r)) { found.region = r; break; }
+  for (const o of NL_OCCASIONS) if (q.includes(o)) { found.occasion = o; break; }
+  for (const c of NL_COLORS) { const re = new RegExp('\\b' + c + '\\b'); if (re.test(q)) found.colors.push(c); }
+  // store as a special NL query object used by matchItem
+  nlQuery = found;
+  render();
+  const parts = [];
+  if (found.colors.length) parts.push(found.colors.join('/'));
+  if (found.region) parts.push(found.region);
+  if (found.fabric) parts.push(found.fabric);
+  if (found.occasion) parts.push(found.occasion);
+  toast(parts.length ? 'Showing: ' + parts.join(', ') : 'No keywords recognized — showing text matches', parts.length ? 'ok' : '');
+}
+let nlQuery = null;
+
+function matchesNl(item) {
+  if (!nlQuery) return true;
+  const f = nlQuery;
+  const colorFields = [item.color, item.body_color, item.border_color].map(x => (x || '').toLowerCase());
+  if (f.colors.length) {
+    const ok = f.colors.some(c => colorFields.some(cf => cf.includes(c) || (c === 'grey' && cf.includes('gray')) || (c === 'sky' && cf.includes('sky'))));
+    if (!ok) return false;
+  }
+  if (f.fabric && !(item.fabric || '').toLowerCase().includes(f.fabric)) {
+    // fabric word might also appear in region (banarasi/kanjivaram)
+    if (!((item.region_name || '').toLowerCase().includes(f.fabric))) return false;
+  }
+  if (f.region && !((item.region_name || '').toLowerCase().includes(f.region) || (item.fabric || '').toLowerCase().includes(f.region))) return false;
+  if (f.occasion) {
+    const occ = (item.occasion || '').toLowerCase();
+    const norm = f.occasion === 'festive' ? 'festival' : f.occasion;
+    if (!occ.includes(norm) && !occ.includes(f.occasion)) return false;
+  }
+  return true;
+}
+
+/* ───────────────── Render catalog ───────────────── */
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+function getFiltered() {
+  const items = cat === 'sarees' ? sarees : blouses;
+  const q = document.getElementById('quickSearch').value.toLowerCase().trim();
+  return items.filter(it => {
+    if (!matchesNl(it)) return false;
+    for (const [f, v] of Object.entries(activeFilters)) {
+      if ((it[f] || '').toLowerCase() !== v.toLowerCase()) return false;
+    }
+    if (q) {
+      const hay = [it.name, it.saree_name, it.color, it.body_color, it.border_color, it.fabric, it.occasion, it.region_name].map(x => (x || '').toLowerCase()).join(' ');
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function render() {
+  if (view !== 'catalog') return;
+  const all = cat === 'sarees' ? sarees : blouses;
+  const items = getFiltered();
+  document.getElementById('countPill').textContent = `${items.length} of ${all.length}`;
+  const c = document.getElementById('catalogContent');
+  if (all.length === 0) {
+    c.innerHTML = `<div class="empty"><div class="ic">🥻</div><h3>No ${cat} yet</h3><p>Click <b>Add ${cat === 'sarees' ? 'Saree' : 'Blouse'}</b>${cat === 'sarees' ? ' or <b>Bulk Upload</b>' : ''} to start building your wardrobe.</p></div>`;
+    return;
+  }
+  if (items.length === 0) {
+    c.innerHTML = `<div class="empty"><div class="ic">🔍</div><h3>No matches</h3><p>Try different search terms or clear your filters.</p></div>`;
+    return;
+  }
+  c.innerHTML = `<div class="grid">${items.map(cardHtml).join('')}</div>`;
+}
+
+function cardHtml(it) {
+  const img = it.image ? `<img class="card-img" src="${esc(it.image)}" loading="lazy" alt="${esc(it.name)}">` : `<div class="card-ph">🥻</div>`;
+  const chips = [];
+  if (it.fabric) chips.push(`<span class="chip">${esc(it.fabric)}</span>`);
+  if (it.occasion) chips.push(`<span class="chip">${esc(it.occasion)}</span>`);
+  if (cat === 'sarees' && it.region_name) chips.push(`<span class="chip">${esc(it.region_name)}</span>`);
+  let swatches = '';
+  if (cat === 'sarees') {
+    const sws = [];
+    if (it.body_color) sws.push(`<span class="sw" title="Body: ${esc(it.body_color)}" style="background:${colorHex(it.body_color)}"></span>`);
+    if (it.border_color) sws.push(`<span class="sw" title="Border: ${esc(it.border_color)}" style="background:${colorHex(it.border_color)}"></span>`);
+    if (sws.length) swatches = `<div class="swatches">${sws.join('')}<span style="font-size:0.68rem;color:var(--muted)">${esc(it.body_color)}${it.border_color ? ' / ' + esc(it.border_color) : ''}</span></div>`;
+  } else if (it.color) {
+    swatches = `<div class="swatches"><span class="sw" style="background:${colorHex(it.color)}"></span><span style="font-size:0.68rem;color:var(--muted)">${esc(it.color)}</span></div>`;
+  }
+  const sub = cat === 'sarees'
+    ? (it.saree_name || it.color || '')
+    : (it.color || '');
+  return `<div class="card">
+    ${img}
+    <div class="card-actions">
+      <button class="act edit" onclick="openEdit(${it.id})" title="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg></button>
+      <button class="act del" onclick="deleteItem(${it.id})" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+    </div>
+    <div class="card-body">
+      <div class="card-name">${esc(it.name || 'Untitled')}</div>
+      ${sub ? `<div class="card-sub">${esc(sub)}</div>` : ''}
+      ${swatches}
+      ${chips.length ? `<div class="chips">${chips.join('')}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+/* ───────────────── Add / Edit item ───────────────── */
+const SAREE_FIELDS = [
+  ['name', 'Name', true, 'text'], ['saree_name', 'Saree Name', false, 'text'],
+  ['body_color', 'Body Color', true, 'text'], ['border_color', 'Border Color', false, 'text'],
+  ['region_name', 'Region Name', false, 'text'], ['color', 'Color', true, 'text'],
+  ['fabric', 'Fabric', true, 'text'], ['occasion', 'Occasion', false, 'text'],
+  ['price', 'Price', false, 'text'], ['purchase_date', 'Purchase Date', false, 'date'],
+];
+const BLOUSE_FIELDS = [
+  ['name', 'Name', true, 'text'], ['color', 'Color', true, 'text'],
+  ['fabric', 'Fabric', true, 'text'], ['occasion', 'Occasion', false, 'text'],
+  ['price', 'Price', false, 'text'], ['purchase_date', 'Purchase Date', false, 'date'],
+];
+
+let formImage = '';
+
+function buildItemForm(data = {}) {
+  const fields = cat === 'sarees' ? SAREE_FIELDS : BLOUSE_FIELDS;
+  formImage = data.image || '';
+  let html = fields.map(([f, label, req, type]) =>
+    `<div class="field"><label>${label}${req ? ' <span class="req">*</span>' : ''}</label><input id="fld_${f}" type="${type}" value="${esc(data[f] || '')}" placeholder="${esc(placeholderFor(f))}"></div>`
+  ).join('');
+  html += `<div class="field full"><label>Notes</label><textarea id="fld_notes" placeholder="Any extra details…">${esc(data.notes || '')}</textarea></div>`;
+  html += `<div class="img-drop">
+      <img class="img-preview" id="imgPreview" src="${esc(formImage)}" style="${formImage ? '' : 'display:none'}">
+      <div class="upload-line">
+        <label class="file-label" for="formFile">📁 Upload Image</label>
+        <input type="file" id="formFile" accept="image/*" style="display:none" onchange="onFormFile(event)">
+        <input class="url-input" id="formUrl" placeholder="…or paste image URL" value="${esc(formImage && formImage.startsWith('http') ? formImage : '')}" onchange="onFormUrl(this.value)">
+      </div>
+    </div>`;
+  document.getElementById('itemForm').innerHTML = html;
+}
+function placeholderFor(f) {
+  return { name: 'e.g. Red Wedding Kanjivaram', saree_name: 'optional nickname', body_color: 'e.g. Red', border_color: 'e.g. Gold', region_name: 'e.g. Kanjivaram, Banarasi', color: 'e.g. Red', fabric: 'e.g. Silk', occasion: 'e.g. Wedding', price: 'e.g. ₹12,000', purchase_date: '' }[f] || '';
+}
+async function onFormFile(e) {
+  const file = e.target.files[0]; if (!file) return;
+  formImage = await fileToDataUrl(file);
+  const p = document.getElementById('imgPreview'); p.src = formImage; p.style.display = '';
+  document.getElementById('formUrl').value = '';
+}
+function onFormUrl(v) {
+  formImage = v.trim();
+  const p = document.getElementById('imgPreview');
+  if (formImage) { p.src = formImage; p.style.display = ''; } else { p.style.display = 'none'; }
+}
+
+function openAdd() {
+  editingId = null;
+  document.getElementById('itemModalTitle').textContent = cat === 'sarees' ? 'Add Saree' : 'Add Blouse';
+  buildItemForm({});
+  show('itemModal');
+}
+function openEdit(id) {
+  const items = cat === 'sarees' ? sarees : blouses;
+  const it = items.find(x => x.id === id); if (!it) return;
+  editingId = id;
+  document.getElementById('itemModalTitle').textContent = cat === 'sarees' ? 'Edit Saree' : 'Edit Blouse';
+  buildItemForm(it);
+  show('itemModal');
+}
+
+async function saveItem() {
+  const fields = cat === 'sarees' ? SAREE_FIELDS : BLOUSE_FIELDS;
+  const body = {};
+  for (const [f, label, req] of fields) {
+    const val = document.getElementById('fld_' + f).value.trim();
+    if (req && !val) { toast(label + ' is required', 'err'); return; }
+    body[f] = val;
+  }
+  body.notes = document.getElementById('fld_notes').value.trim();
+  body.image = formImage;
+  try {
+    const ep = cat === 'sarees' ? '/sarees' : '/blouses';
+    if (editingId) await api(ep + '/' + editingId, { method: 'PUT', body: JSON.stringify(body) });
+    else await api(ep, { method: 'POST', body: JSON.stringify(body) });
+    closeModal('itemModal');
+    toast(editingId ? 'Updated' : 'Added', 'ok');
+    await loadAll();
+  } catch (e) { toast('Save failed: ' + e.message, 'err'); }
+}
+
+async function deleteItem(id) {
+  if (!confirm('Delete this item?')) return;
+  try {
+    await api((cat === 'sarees' ? '/sarees/' : '/blouses/') + id, { method: 'DELETE' });
+    toast('Deleted', 'ok');
+    await loadAll();
+  } catch (e) { toast('Delete failed: ' + e.message, 'err'); }
+}
+
+/* ───────────────── Bulk upload ───────────────── */
+function openBulk() { bulkItems = []; document.getElementById('bulkList').innerHTML = '<p class="hint" style="text-align:center">No images yet — choose some above.</p>'; show('bulkModal'); }
+
+async function handleBulkFiles(e) {
+  const files = [...e.target.files];
+  if (!files.length) return;
+  const list = document.getElementById('bulkList');
+  list.innerHTML = `<div class="loading-text"><div class="spinner"></div> Detecting colors in ${files.length} image(s)…</div>`;
+  for (const file of files) {
+    try {
+      const dataUrl = await fileToDataUrl(file);
+      const img = await loadImage(dataUrl);
+      const det = detectColors(img);
+      bulkItems.push({
+        image: dataUrl, name: file.name.replace(/\.[^.]+$/, '').slice(0, 40),
+        saree_name: '', body_color: det.bodyColor, border_color: det.borderColor,
+        region_name: '', color: det.bodyColor, fabric: '', occasion: '', price: '', purchase_date: '', notes: '',
+        bodyHex: hsl2hex(...rgb2hsl(...det.bodyRgb)), borderHex: hsl2hex(...rgb2hsl(...det.borderRgb)),
+      });
+    } catch (err) { console.error(err); }
+  }
+  e.target.value = '';
+  renderBulk();
+}
+
+function renderBulk() {
+  const list = document.getElementById('bulkList');
+  if (!bulkItems.length) { list.innerHTML = '<p class="hint" style="text-align:center">No images yet — choose some above.</p>'; return; }
+  list.innerHTML = bulkItems.map((it, i) => `
+    <div class="bulk-item">
+      <img src="${esc(it.image)}">
+      <div class="bulk-fields">
+        <div class="field"><label>Name <span class="req">*</span></label><input value="${esc(it.name)}" oninput="bulkSet(${i},'name',this.value)"></div>
+        <div class="field"><label>Fabric <span class="req">*</span></label><input value="${esc(it.fabric)}" placeholder="e.g. Silk" oninput="bulkSet(${i},'fabric',this.value)"></div>
+        <div class="field"><label><span class="swatch-inline" style="background:${it.bodyHex}"></span>Body Color <span class="req">*</span></label><input value="${esc(it.body_color)}" oninput="bulkSet(${i},'body_color',this.value)"></div>
+        <div class="field"><label><span class="swatch-inline" style="background:${it.borderHex}"></span>Border Color</label><input value="${esc(it.border_color)}" oninput="bulkSet(${i},'border_color',this.value)"></div>
+        <div class="field"><label>Color <span class="req">*</span></label><input value="${esc(it.color)}" oninput="bulkSet(${i},'color',this.value)"></div>
+        <div class="field"><label>Region</label><input value="${esc(it.region_name)}" placeholder="e.g. Kanjivaram" oninput="bulkSet(${i},'region_name',this.value)"></div>
+        <div class="field"><label>Occasion</label><input value="${esc(it.occasion)}" oninput="bulkSet(${i},'occasion',this.value)"></div>
+        <div class="field"><label>Price</label><input value="${esc(it.price)}" oninput="bulkSet(${i},'price',this.value)"></div>
+      </div>
+      <button class="bulk-del" onclick="bulkRemove(${i})" title="Remove">&times;</button>
+    </div>`).join('');
+}
+function bulkSet(i, f, v) { bulkItems[i][f] = v; }
+function bulkRemove(i) { bulkItems.splice(i, 1); renderBulk(); }
+
+async function saveBulk() {
+  const ready = bulkItems.filter(it => it.name.trim() && it.body_color.trim() && it.color.trim() && it.fabric.trim());
+  if (!ready.length) { toast('Fill required fields (Name, Body Color, Color, Fabric) on at least one item', 'err'); return; }
+  const btn = document.getElementById('bulkSaveBtn'); btn.disabled = true; btn.textContent = 'Saving…';
+  try {
+    for (const it of ready) {
+      const { bodyHex, borderHex, ...body } = it;
+      await api('/sarees', { method: 'POST', body: JSON.stringify(body) });
+    }
+    closeModal('bulkModal');
+    toast(`Saved ${ready.length} saree(s)`, 'ok');
+    await loadAll();
+  } catch (e) { toast('Bulk save failed: ' + e.message, 'err'); }
+  finally { btn.disabled = false; btn.textContent = 'Save All'; }
+}
+
+/* ───────────────── Check catalog ───────────────── */
+function openCheck() { document.getElementById('checkResult').innerHTML = ''; show('checkModal'); }
+
+async function handleCheckFile(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const box = document.getElementById('checkResult');
+  box.innerHTML = `<div class="loading-text"><div class="spinner"></div> Analyzing colors…</div>`;
+  try {
+    const dataUrl = await fileToDataUrl(file);
+    const img = await loadImage(dataUrl);
+    const det = detectColors(img);
+    const bodyRgb = det.bodyRgb, borderRgb = det.borderRgb;
+
+    const scored = sarees.map(s => {
+      let score = 0, parts = 0;
+      if (s.body_color) { parts++; if (s.body_color.toLowerCase() === det.bodyColor.toLowerCase()) score += 1; else if (sameFamily(s.body_color, det.bodyColor)) score += 0.5; }
+      if (s.border_color && det.borderColor) { parts++; if (s.border_color.toLowerCase() === det.borderColor.toLowerCase()) score += 1; else if (sameFamily(s.border_color, det.borderColor)) score += 0.5; }
+      const pct = parts ? Math.round((score / parts) * 100) : 0;
+      return { s, pct };
+    }).filter(x => x.pct >= 50).sort((a, b) => b.pct - a.pct).slice(0, 6);
+
+    let html = `<div style="display:flex;gap:0.8rem;align-items:center;justify-content:center;margin:0.5rem 0 1rem;padding:0.7rem;background:var(--grad-soft);border-radius:12px;">
+        <img src="${esc(dataUrl)}" style="width:54px;height:70px;object-fit:cover;border-radius:8px;">
+        <div style="font-size:0.85rem;">
+          <div style="font-weight:700;margin-bottom:0.3rem;">Detected colors</div>
+          <div><span class="swatch-inline" style="background:${hsl2hex(...rgb2hsl(...bodyRgb))}"></span> Body: <b>${esc(det.bodyColor)}</b></div>
+          <div><span class="swatch-inline" style="background:${hsl2hex(...rgb2hsl(...borderRgb))}"></span> Border: <b>${esc(det.borderColor)}</b></div>
+        </div>
+      </div>`;
+
+    if (!sarees.length) {
+      html += `<p class="hint" style="text-align:center">Your catalog is empty — add sarees to compare against.</p>`;
+    } else if (!scored.length) {
+      html += `<div style="text-align:center;padding:1rem;"><div style="font-size:2rem">✨</div><h3 style="margin:0.4rem 0;color:var(--purple)">This looks unique!</h3><p class="hint">No close color matches found in your catalog.</p></div>`;
+    } else {
+      html += `<p class="hint" style="margin-bottom:0.5rem">${scored.length} similar saree(s) in your catalog:</p>` + scored.map(({ s, pct }) => `
+        <div class="match-card">
+          ${s.image ? `<img src="${esc(s.image)}">` : `<div class="match-ph">🥻</div>`}
+          <div><div style="font-weight:700;font-size:0.88rem">${esc(s.name)}</div>
+          <div style="font-size:0.74rem;color:var(--muted);margin-top:0.2rem"><span class="swatch-inline" style="background:${colorHex(s.body_color)}"></span>${esc(s.body_color)}${s.border_color ? ' · <span class="swatch-inline" style="background:' + colorHex(s.border_color) + '"></span>' + esc(s.border_color) : ''}</div></div>
+          <div class="match-pct">${pct}%<div style="font-size:0.6rem;font-weight:600;color:var(--muted)">match</div></div>
+        </div>`).join('');
+    }
+    box.innerHTML = html;
+  } catch (err) { box.innerHTML = `<p class="hint" style="text-align:center;color:#c0334e">Could not analyze image: ${esc(err.message)}</p>`; }
+  e.target.value = '';
+}
+
+function sameFamily(a, b) {
+  const ca = COLOR_NAMES.find(c => c[0].toLowerCase() === (a || '').toLowerCase());
+  const cb = COLOR_NAMES.find(c => c[0].toLowerCase() === (b || '').toLowerCase());
+  if (!ca || !cb) return false;
+  let dh = Math.abs(ca[1][0] - cb[1][0]); if (dh > 180) dh = 360 - dh;
+  return dh < 30;
+}
+
+/* ───────────────── Outfits ───────────────── */
+function openOutfit() {
+  if (!sarees.length || !blouses.length) { toast('Add at least one saree and one blouse first', 'err'); switchView('catalog'); return; }
+  const form = document.getElementById('outfitForm');
+  form.innerHTML = `
+    <div class="field full"><label>Outfit Name <span class="req">*</span></label><input id="of_name" placeholder="e.g. Cousin's Wedding Look"></div>
+    <div class="field"><label>Saree <span class="req">*</span></label><select id="of_saree"><option value="">Select…</option>${sarees.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select></div>
+    <div class="field"><label>Blouse <span class="req">*</span></label><select id="of_blouse"><option value="">Select…</option>${blouses.map(b => `<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select></div>
+    <div class="field full"><label>Occasion</label><input id="of_occasion" placeholder="e.g. Wedding"></div>`;
+  show('outfitModal');
+}
+
+async function saveOutfit() {
+  const name = document.getElementById('of_name').value.trim();
+  const saree_id = parseInt(document.getElementById('of_saree').value) || null;
+  const blouse_id = parseInt(document.getElementById('of_blouse').value) || null;
+  const occasion = document.getElementById('of_occasion').value.trim();
+  if (!name) { toast('Outfit name is required', 'err'); return; }
+  if (!saree_id || !blouse_id) { toast('Select a saree and a blouse', 'err'); return; }
+  try {
+    await api('/outfits', { method: 'POST', body: JSON.stringify({ name, saree_id, blouse_id, occasion }) });
+    closeModal('outfitModal');
+    toast('Outfit created', 'ok');
+    await loadAll();
+  } catch (e) { toast('Failed: ' + e.message, 'err'); }
+}
+
+function renderOutfits() {
+  const c = document.getElementById('outfitsContent');
+  if (!outfits.length) {
+    c.innerHTML = `<div class="empty"><div class="ic">👗</div><h3>No outfits yet</h3><p>Pair a saree with a blouse to create your first outfit combination.</p></div>`;
+    return;
+  }
+  c.innerHTML = `<div class="outfit-grid">${outfits.map(outfitHtml).join('')}</div>`;
+}
+
+function outfitHtml(o) {
+  const s = sarees.find(x => x.id === o.saree_id);
+  const b = blouses.find(x => x.id === o.blouse_id);
+  const half = (item, tag, deleted) => {
+    if (deleted) return `<div class="half"><div class="ph">⚠️</div><span class="outfit-tag" style="background:rgba(192,51,78,0.85)">${tag} deleted</span></div>`;
+    return `<div class="half">${item.image ? `<img src="${esc(item.image)}">` : `<div class="ph">${tag === 'Saree' ? '🥻' : '👚'}</div>`}<span class="outfit-tag">${esc(item.name)}</span></div>`;
+  };
+  return `<div class="outfit-card">
+    <div class="outfit-pair">${half(s, 'Saree', !s)}${half(b, 'Blouse', !b)}</div>
+    <div class="outfit-body">
+      <div class="outfit-name">${esc(o.name)}</div>
+      <div class="outfit-meta">${o.occasion ? esc(o.occasion) + ' · ' : ''}${o.last_worn ? 'Last worn ' + esc(o.last_worn) : 'Never worn'}</div>
+      <div class="outfit-btns">
+        <button class="obtn worn" onclick="markWorn(${o.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Worn Today</button>
+        <button class="obtn del-o" onclick="deleteOutfit(${o.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Delete</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function markWorn(id) {
+  try { await api('/outfits/' + id + '/worn', { method: 'POST' }); toast('Marked as worn today', 'ok'); await loadAll(); }
+  catch (e) { toast('Failed: ' + e.message, 'err'); }
+}
+async function deleteOutfit(id) {
+  if (!confirm('Delete this outfit?')) return;
+  try { await api('/outfits/' + id, { method: 'DELETE' }); toast('Deleted', 'ok'); await loadAll(); }
+  catch (e) { toast('Failed: ' + e.message, 'err'); }
+}
+
+/* ───────────────── Export / Import ───────────────── */
+async function exportData() {
+  try {
+    const data = await api('/export');
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const d = new Date().toISOString().slice(0, 10);
+    a.href = url; a.download = `wardrobe-backup-${d}.json`; a.click();
+    URL.revokeObjectURL(url);
+    toast('Exported backup', 'ok');
+  } catch (e) { toast('Export failed: ' + e.message, 'err'); }
+}
+
+async function importData(e) {
+  const file = e.target.files[0]; if (!file) return;
+  try {
+    const text = await file.text();
+    const data = JSON.parse(text);
+    if (!data.sarees && !data.blouses && !data.outfits) throw new Error('Not a valid wardrobe backup');
+    const replace = confirm('Replace your current wardrobe with this backup?\n\nOK = Replace everything\nCancel = Merge (add to existing)');
+    const res = await api('/import', { method: 'POST', body: JSON.stringify({ sarees: data.sarees || [], blouses: data.blouses || [], outfits: data.outfits || [], replace }) });
+    toast(`Imported ${res.imported.sarees} sarees, ${res.imported.blouses} blouses, ${res.imported.outfits} outfits`, 'ok');
+    await loadAll();
+  } catch (err) { toast('Import failed: ' + err.message, 'err'); }
+  finally { e.target.value = ''; }
+}
+
+/* ───────────────── Modal helpers ───────────────── */
+function show(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) o.classList.remove('show'); }));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.overlay.show').forEach(o => o.classList.remove('show')); });
+
+/* ───────────────── Init ───────────────── */
+loadAll();
+</script>
+</body>
+</html>
