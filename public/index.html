@@ -188,6 +188,7 @@
     <button class="hbtn" onclick="exportData()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button>
     <button class="hbtn" onclick="document.getElementById('importFile').click()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Import</button>
     <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importData(event)">
+    <button class="hbtn" id="profileBtn" onclick="openProfile()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> <span id="profileLabel">Profile</span></button>
   </div>
 </header>
 
@@ -307,12 +308,48 @@
   </div>
 </div>
 
+<!-- PROFILE MODAL -->
+<div class="overlay" id="profileModal">
+  <div class="modal" style="max-width:440px">
+    <div class="modal-head"><h2>Your Wardrobe Profile</h2><button class="modal-x" onclick="closeModal('profileModal')">&times;</button></div>
+    <div class="modal-body">
+      <div class="field full"><label>Display name</label><input id="profileName" placeholder="e.g. Asha's Sarees"></div>
+      <p class="hint">Name your wardrobe, then use the link below to open it on another phone or laptop — your collection follows you.</p>
+      <div id="shareSection" style="display:none;margin-top:1.1rem;padding-top:1rem;border-top:1px dashed var(--line)">
+        <label style="font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Your wardrobe link</label>
+        <div style="display:flex;gap:0.5rem;margin-top:0.35rem">
+          <input id="shareLink" class="url-input" readonly style="flex:1;min-width:0" onclick="this.select()">
+          <button class="icon-btn btn-grad" onclick="copyShare()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+        </div>
+        <p class="hint">⚠️ Anyone with this link can view and edit this wardrobe — share it only with people you trust.</p>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('profileModal')">Close</button>
+      <button class="btn-save" onclick="saveProfile()">Save</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 /* ───────────────── State & API ───────────────── */
-let TOKEN = localStorage.getItem('wardrobe_token');
-if (!TOKEN) { TOKEN = 'u_' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('wardrobe_token', TOKEN); }
+function initToken() {
+  const urlToken = new URLSearchParams(location.search).get('token');
+  if (urlToken) {
+    // Opened via a share link — adopt that wardrobe and clean the URL.
+    localStorage.setItem('wardrobe_token', urlToken);
+    localStorage.setItem('wardrobe_demo_dismissed', '1');
+    history.replaceState({}, '', location.pathname);
+    return urlToken;
+  }
+  let t = localStorage.getItem('wardrobe_token');
+  if (!t) { t = 'u_' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('wardrobe_token', t); }
+  return t;
+}
+let TOKEN = initToken();
+let profileName = '';
 
 let sarees = [], blouses = [], outfits = [];
 let view = 'catalog', cat = 'sarees';
@@ -1040,6 +1077,44 @@ async function importData(e) {
   finally { e.target.value = ''; }
 }
 
+/* ───────────────── Profile ───────────────── */
+function shareUrl() { return `${location.origin}/?token=${encodeURIComponent(TOKEN)}`; }
+function updateProfileLabel() {
+  document.getElementById('profileLabel').textContent = profileName || 'Create profile';
+  document.getElementById('profileBtn').title = profileName ? 'Manage profile & share link' : 'Name your wardrobe to share it';
+}
+async function loadProfile() {
+  try {
+    const c = await api('/config');
+    profileName = c.display_name || '';
+  } catch (e) { profileName = ''; }
+  updateProfileLabel();
+}
+function openProfile() {
+  document.getElementById('profileName').value = profileName;
+  const share = document.getElementById('shareSection');
+  if (profileName) { document.getElementById('shareLink').value = shareUrl(); share.style.display = ''; }
+  else { share.style.display = 'none'; }
+  show('profileModal');
+}
+async function saveProfile() {
+  const name = document.getElementById('profileName').value.trim();
+  if (!name) { toast('Enter a display name', 'err'); return; }
+  try {
+    const res = await api('/config', { method: 'PATCH', body: JSON.stringify({ display_name: name }) });
+    profileName = res.display_name || name;
+    updateProfileLabel();
+    document.getElementById('shareLink').value = shareUrl();
+    document.getElementById('shareSection').style.display = '';
+    toast('Profile saved', 'ok');
+  } catch (e) { toast('Save failed: ' + e.message, 'err'); }
+}
+function copyShare() {
+  const url = shareUrl();
+  navigator.clipboard.writeText(url).then(() => toast('Link copied to clipboard', 'ok'))
+    .catch(() => { document.getElementById('shareLink').select(); toast('Press ⌘/Ctrl+C to copy', ''); });
+}
+
 /* ───────────────── Modal helpers ───────────────── */
 function show(id) { document.getElementById(id).classList.add('show'); }
 function closeModal(id) { document.getElementById(id).classList.remove('show'); }
@@ -1047,6 +1122,7 @@ document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e
 document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.overlay.show').forEach(o => o.classList.remove('show')); });
 
 /* ───────────────── Init ───────────────── */
+loadProfile();
 loadAll();
 </script>
 </body>

@@ -39,6 +39,13 @@ class Blouse(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
+class Config(Base):
+    __tablename__ = "config"
+    id = Column(Integer, primary_key=True, index=True)
+    token = Column(String(64), index=True, default="")
+    display_name = Column(String(120), default="")
+
+
 class Outfit(Base):
     __tablename__ = "outfits"
     id = Column(Integer, primary_key=True, index=True)

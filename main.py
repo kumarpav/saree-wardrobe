@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from pydantic import BaseModel
 from typing import Optional
 
-from models import Base, Saree, Blouse, Outfit
+from models import Base, Saree, Blouse, Outfit, Config
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./wardrobe.db")
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
@@ -35,6 +35,28 @@ def get_token(x_user_token: str = Header(default="")) -> str:
 @app.get("/")
 def root():
     return FileResponse("public/index.html")
+
+
+# ── Profile / config ──
+class ConfigIn(BaseModel):
+    display_name: str = ""
+
+
+@app.get("/config")
+def get_config(db: Session = Depends(get_db), token: str = Depends(get_token)):
+    c = db.query(Config).filter(Config.token == token).first()
+    return {"display_name": c.display_name if c else ""}
+
+
+@app.patch("/config")
+def set_config(req: ConfigIn, db: Session = Depends(get_db), token: str = Depends(get_token)):
+    c = db.query(Config).filter(Config.token == token).first()
+    if not c:
+        c = Config(token=token)
+        db.add(c)
+    c.display_name = req.display_name.strip()
+    db.commit()
+    return {"display_name": c.display_name}
 
 
 # ── Schemas ──
